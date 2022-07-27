@@ -9,8 +9,6 @@ import { AuthServiceService } from 'src/app/auth-service.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
-
   formGroup!: FormGroup;
   constructor(private authService:AuthServiceService) { }
   ngOnInit(): void {
