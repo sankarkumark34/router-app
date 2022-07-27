@@ -1,36 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { validateBasis } from '@angular/flex-layout';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthServiceService } from 'src/app/auth-service.service';
-
+import { AuthService } from 'src/app/auth-service.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  formGroup!: FormGroup;
-  constructor(private authService:AuthServiceService) { }
-  ngOnInit(): void {
-    this.initForm
-  }
-  initForm(){
-    this.formGroup = new FormGroup({
-      email: new FormControl('',Validators.required),
-      password: new FormControl('',Validators.required)
+  email: any;
+  password: any;
+  constructor(private authService : AuthService,
+    private router: Router) { }
+  login(): void {
+    this.authService.userLogin(this.email,this.password).subscribe(result=>{
+      console.log(result);
     })
-  }
-  loginProcess(){
-    if(this.formGroup.valid){
-      this.authService.login(this.formGroup.value).subscribe(result=>{
-        if(result.success){
-          console.log(result);
-          alert(result.message)
-        }else{
-          alert(result.message)
-        }
-      })
-    }
+}
+
+  ngOnInit(): void {
   }
 
 }

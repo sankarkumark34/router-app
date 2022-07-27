@@ -1,15 +1,15 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { baseUrl } from 'src/environments/environment';
+import {HttpClient,HttpClientModule} from '@angular/common/http'
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class AuthService {
 
-  constructor(private  http:HttpClient) { }
-  login(data: any):Observable<any>{
-    return this.http.post(`${baseUrl}auth/login`,data)
-  }
+  constructor(private http:HttpClient) { }
+
+  userLogin(email : string,password:string): Observable<any> {
+    return this.http.post('https://neox.c1exchange.com:4000/auth/login',{email,password})
+  } 
 }
